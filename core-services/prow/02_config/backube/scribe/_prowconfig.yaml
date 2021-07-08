@@ -1,3 +1,4 @@
+# https://github.com/kubernetes/test-infra/blob/master/prow/cmd/branchprotector/README.md
 branch-protection:
   orgs:
     backube:
@@ -6,6 +7,21 @@ branch-protection:
           branches:
             master:
               protect: true
+              required_status_checks:
+                contexts:
+                - "Build docs"
+                - DCO
+                - "Successful e2e tests"
+                strict: true
+            "release-*":
+              protect: true
+              required_status_checks:
+                contexts:
+                - "Build docs"
+                - DCO
+                - "Successful e2e tests"
+                strict: true
+
 tide:
   queries:
   - labels:
